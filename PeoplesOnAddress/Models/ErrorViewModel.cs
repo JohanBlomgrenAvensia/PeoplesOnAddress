@@ -1,6 +1,6 @@
 using System;
 
-namespace PersonsOnAddress.Models
+namespace PeoplesOnAddress.Models
 {
     public class ErrorViewModel
     {

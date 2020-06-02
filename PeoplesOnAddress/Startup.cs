@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PersonsOnAddress.Data;
-using PersonsOnAddress.Services;
+using PeoplesOnAddress.Data;
+using PeoplesOnAddress.Services;
 
-namespace PersonsOnAddress
+namespace PeoplesOnAddress
 {
     public class Startup
     {

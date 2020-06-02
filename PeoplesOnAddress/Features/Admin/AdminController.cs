@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonsOnAddress.Services;
+using PeoplesOnAddress.Services;
 
-namespace PersonsOnAddress.Features.Admin
+namespace PeoplesOnAddress.Features.Admin
 {
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
@@ -27,7 +27,7 @@ namespace PersonsOnAddress.Features.Admin
 
         public ActionResult CreateUSer(AdminViewModel model)
         {
-
+            return View();
         }
 
     }

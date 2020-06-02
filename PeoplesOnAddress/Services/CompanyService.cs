@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace PersonsOnAddress.Services
+namespace PeoplesOnAddress.Services
 {
     public class CompanyService
     {

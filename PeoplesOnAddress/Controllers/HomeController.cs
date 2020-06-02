@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PersonsOnAddress.Models;
+using PeoplesOnAddress.Models;
 
-namespace PersonsOnAddress.Controllers
+namespace PeoplesOnAddress.Controllers
 {
     public class HomeController : Controller
     {

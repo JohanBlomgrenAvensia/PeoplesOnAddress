@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-PersonsOnAddress-2B1FA77D-D92F-4A9F-AE6E-2AE900A93197</UserSecretsId>
+    <UserSecretsId>aspnet-PeoplesOnAddress-2B1FA77D-D92F-4A9F-AE6E-2AE900A93197</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

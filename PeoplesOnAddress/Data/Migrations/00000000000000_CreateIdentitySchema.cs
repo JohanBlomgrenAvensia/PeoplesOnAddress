@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PersonsOnAddress.Data.Migrations
+namespace PeoplesOnAddress.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

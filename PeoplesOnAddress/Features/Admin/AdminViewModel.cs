@@ -1,4 +1,4 @@
-﻿namespace PersonsOnAddress.Features.Admin
+﻿namespace PeoplesOnAddress.Features.Admin
 {
     public class AdminViewModel
     {

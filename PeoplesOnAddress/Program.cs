@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace PersonsOnAddress
+namespace PeoplesOnAddress
 {
     public class Program
     {
