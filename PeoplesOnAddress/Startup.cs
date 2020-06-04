@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PeoplesOnAddress.Data;
 using PeoplesOnAddress.Services;
+using PersonsOnAddress.Jobs;
+using PersonsOnAddress.Jobs.JobsBase;
+using PersonsOnAddress.Services;
+using System;
 
 namespace PeoplesOnAddress
 {
@@ -33,6 +37,12 @@ namespace PeoplesOnAddress
             services.AddRazorPages();
 
             services.AddScoped<CompanyService>();
+            services.AddScoped<UserService>();
+            services.AddCronJob<CheckAddresses>(c =>
+            {
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @"*/1 * * * *";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +56,7 @@ namespace PeoplesOnAddress
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/StartPage/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -62,7 +72,7 @@ namespace PeoplesOnAddress
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=StartPage}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
 

@@ -11,7 +11,7 @@
         <div class="col-md-6">
 
             <form id="account" method="post" asp-controller="Admin" asp-action="CreateCompany">
-                <h4>Use a local account to log in.</h4>
+                <h4>Create company</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -19,12 +19,52 @@
                     <input asp-for="@Model.Company.Name" class="form-control" />
                     <span asp-validation-for="@Model.Company.Name" class="text-danger"></span>
                 </div>
-                
+
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-primary">Ok</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+
+            <form id="account" method="post" asp-controller="Admin" asp-action="CreateUser" autocomplete="off">
+                <h4>Create user</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.User.Email"></label>
+                    <input asp-for="@Model.User.Email" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.User.Password"></label>
+                    <input asp-for="@Model.User.Password" class="form-control" type="password" autocomplete="off" />
+                    <span asp-validation-for="@Model.User.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <select asp-for="@Model.User.Company" asp-items="@Model.Companies"></select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Ok</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Companies</h4>
+            <ul id="companyList">
+                @foreach (var company in Model.Companies)
+                {
+                    <li data-value="@company.Value">@company.Text</li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4>Users</h4>
+            <div id="displayUsers"></div>
+        </div>
+    </div>
 </div>
-      
+

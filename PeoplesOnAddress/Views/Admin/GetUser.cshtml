@@ -1,0 +1,13 @@
+﻿@model List<PeoplesOnAddress.Features.Admin.User>
+@{ 
+    Layout = null;
+}
+
+<div>
+    <ul>
+        @foreach(var user in Model)
+        {
+            <li>@user.Email</li>
+        }
+    </ul>
+</div>
