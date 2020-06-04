@@ -37,7 +37,7 @@ namespace PeoplesOnAddress.Services
                     csvReader.Configuration.RegisterClassMap<AddressCsvMap>();
                     var records = csvReader.GetRecords<AddressCsvMap>();
 
-                    //var obj = csvReader.GetRecords<SeoUrlsCsvModel>();
+                    
                     //_logger.LogError(ex, "Could not parse file");
                     if (AnalyzerFileReference(file))
                     {
