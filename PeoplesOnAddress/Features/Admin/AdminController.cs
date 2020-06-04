@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeoplesOnAddress.Services;
-using PersonsOnAddress.Services;
 using System.Linq;
 using System.Threading.Tasks;
 

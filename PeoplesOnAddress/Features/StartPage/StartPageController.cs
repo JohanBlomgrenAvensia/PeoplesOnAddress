@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using PeoplesOnAddress.Models;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using PeoplesOnAddress.Models;
 
-namespace PeoplesOnAddress.Features.StartPage.Controllers
+namespace PeoplesOnAddress.Features.StartPage
 {
     public class StartPageController : Controller
     {

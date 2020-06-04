@@ -3,21 +3,22 @@ using Microsoft.Extensions.Configuration;
 using PeoplesOnAddress.Features.Admin;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace PeoplesOnAddress.Services
 {
     public class CompanyService
     {
-        private readonly IConfiguration _configuration;
         private readonly string _connectionString;
-        public CompanyService(IConfiguration configuration)
+        private readonly ILogger<CompanyService> _logger;
+        public CompanyService(IConfiguration configuration, ILogger<CompanyService> logger)
         {
-            _configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+            _logger = logger;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
         public bool CreateCompany(string name)
         {
-            var success = false;
+            bool success;
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 con.Open();
@@ -34,7 +35,11 @@ namespace PeoplesOnAddress.Services
                     ParameterName = "@id",
                     Value = Guid.NewGuid().ToString()
                 });
-                success = command.ExecuteNonQuery() == 1 ? true : false;
+                success = command.ExecuteNonQuery() == 1;
+                if (!success)
+                {
+                    _logger.LogCritical("Could not create company");
+                }
                 con.Close();
             }
             return success;

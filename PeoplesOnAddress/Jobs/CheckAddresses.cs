@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using PersonsOnAddress.Jobs.JobsBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using PeoplesOnAddress.Jobs.JobsBase;
 
-namespace PersonsOnAddress.Jobs
+namespace PeoplesOnAddress.Jobs
 {
     public class CheckAddresses : CronJobService
     {

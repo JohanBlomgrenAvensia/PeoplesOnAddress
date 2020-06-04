@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>Logged in @User.Identity.Name </h1>
+
+<form class="col-xs-12" method="post" action="/UserPage/AddAddressFile" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <input type="file" class="form-control" name="addressFile" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary col-xs-12">Add</button>
+    </div>
+</form>

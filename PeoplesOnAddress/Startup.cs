@@ -7,10 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PeoplesOnAddress.Data;
 using PeoplesOnAddress.Services;
-using PersonsOnAddress.Jobs;
-using PersonsOnAddress.Jobs.JobsBase;
-using PersonsOnAddress.Services;
 using System;
+using PeoplesOnAddress.Jobs;
+using PeoplesOnAddress.Jobs.JobsBase;
 
 namespace PeoplesOnAddress
 {
@@ -38,6 +37,7 @@ namespace PeoplesOnAddress
 
             services.AddScoped<CompanyService>();
             services.AddScoped<UserService>();
+            services.AddScoped<FileService>();
             services.AddCronJob<CheckAddresses>(c =>
             {
                 c.TimeZoneInfo = TimeZoneInfo.Local;

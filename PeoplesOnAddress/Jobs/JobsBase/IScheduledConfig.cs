@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonsOnAddress.Jobs.JobsBase
+namespace PeoplesOnAddress.Jobs.JobsBase
 {
     public interface IScheduleConfig<T>
     {

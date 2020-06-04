@@ -83,6 +83,7 @@ namespace PeoplesOnAddress.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    return RedirectToAction("Index", "UserPage");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

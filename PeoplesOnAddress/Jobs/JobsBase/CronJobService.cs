@@ -1,10 +1,10 @@
-﻿using Cronos;
-using Microsoft.Extensions.Hosting;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cronos;
+using Microsoft.Extensions.Hosting;
 
-namespace PersonsOnAddress.Jobs.JobsBase
+namespace PeoplesOnAddress.Jobs.JobsBase
 {
     public class CronJobService : IHostedService, IDisposable
     {

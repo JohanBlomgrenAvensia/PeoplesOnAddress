@@ -1,26 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using PeoplesOnAddress.Features.Admin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PersonsOnAddress.Services
+namespace PeoplesOnAddress.Services
 {
     public class UserService
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
+        private readonly ILogger<UserService> _logger;
 
-        public UserService(IConfiguration configuration)
+        public UserService(IConfiguration configuration, ILogger<UserService> logger)
         {
             _configuration = configuration;
+            _logger = logger;
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
         public bool ConnectUserToCompany(string companyId, string userId)
         {
-            var success = false;
+            bool success;
             using (SqlConnection con = new SqlConnection(_connectionString))
             {
                 con.Open();
@@ -37,7 +37,11 @@ namespace PersonsOnAddress.Services
                     ParameterName = "@UserId",
                     Value = userId
                 });
-                success = command.ExecuteNonQuery() == 1 ? true : false;
+                success = command.ExecuteNonQuery() == 1;
+                if (!success)
+                {
+                    _logger.LogCritical("Could not connect user to company");
+                }
                 con.Close();
             }
             return success;
