@@ -29,42 +29,22 @@ namespace PeoplesOnAddress.Services
             {
                 using (TextReader reader = new StreamReader(file.OpenReadStream()))
                 {
-                    var readerString = reader.ReadToEnd();
-
-                    Encoding encoding = Encoding.Unicode;
-
-                    var bytes = Encoding.Convert(Encoding.UTF8, Encoding.Unicode, encoding.GetBytes(readerString));
-
-                    var utf8 = Encoding.UTF8.GetString(encoding.GetBytes(readerString));
-                    var unicode = Encoding.Unicode.GetString(encoding.GetBytes(readerString));
-                    var def = Encoding.Default.GetString(encoding.GetBytes(readerString));
-                    var asc = Encoding.ASCII.GetString(encoding.GetBytes(readerString));
-
-
-
-                    var memStream = new MemoryStream(bytes);
-                    using (TextReader reader2 = new StreamReader(memStream))
+                    //TODO CHECK IF VALID CSV
+                    var csvReader = new CsvReader(reader, configuration: new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        Delimiter = ";"
+
+                    });
+                    //csvReader.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
+                    //csvReader.Configuration.HasHeaderRecord = true;
+                    //csvReader.Configuration.RegisterClassMap<AddressCsvMap>();
+                    var records = csvReader.GetRecords<AddressCsv>();
 
 
-
-                        //TODO CHECK IF VALID CSV
-                        var csvReader = new CsvReader(reader2, configuration: new CsvConfiguration(CultureInfo.InvariantCulture)
-                        {
-                            Delimiter = ";"
-
-                        });
-                        //csvReader.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
-                        //csvReader.Configuration.HasHeaderRecord = true;
-                        //csvReader.Configuration.RegisterClassMap<AddressCsvMap>();
-                        var records = csvReader.GetRecords<AddressCsv>();
-
-
-                        //_logger.LogError(ex, "Could not parse file");
-                        if (AnalyzerFileReference(file))
-                        {
-                            success = true;
-                        }
+                    //_logger.LogError(ex, "Could not parse file");
+                    if (AnalyzerFileReference(file))
+                    {
+                        success = true;
                     }
                 }
             }
