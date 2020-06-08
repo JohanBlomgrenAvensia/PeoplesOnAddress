@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
-using CsvHelper;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic.FileIO;
+using System.Globalization;
+using System.IO;
 
 namespace PeoplesOnAddress.Services
 {
@@ -27,25 +22,22 @@ namespace PeoplesOnAddress.Services
             bool success = false;
             if (file != null)
             {
-                using (TextReader reader = new StreamReader(file.OpenReadStream()))
+                using TextReader reader = new StreamReader(file.OpenReadStream());
+                //TODO CHECK IF VALID CSV
+                //FILE MUST BE SAVED IN UTF-8 TO HANDLE ÅÄÖ CHARACTERS
+                var csvReader = new CsvReader(reader, configuration: new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
-                    //TODO CHECK IF VALID CSV
-                    var csvReader = new CsvReader(reader, configuration: new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        Delimiter = ";"
+                    Delimiter = ";"
 
-                    });
-                    //csvReader.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
-                    //csvReader.Configuration.HasHeaderRecord = true;
-                    //csvReader.Configuration.RegisterClassMap<AddressCsvMap>();
-                    var records = csvReader.GetRecords<AddressCsv>();
+                });
+                csvReader.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
+                var records = csvReader.GetRecords<AddressCsv>();
 
 
-                    //_logger.LogError(ex, "Could not parse file");
-                    if (AnalyzerFileReference(file))
-                    {
-                        success = true;
-                    }
+                //_logger.LogError(ex, "Could not parse file");
+                if (AnalyzerFileReference(file))
+                {
+                    success = true;
                 }
             }
             return success;
@@ -56,22 +48,6 @@ namespace PeoplesOnAddress.Services
             //TODO Analyze data
             return true;
         }
-    }
-
-    public sealed class AddressCsvMap : ClassMap<AddressCsv>
-    {
-        public AddressCsvMap()
-        {
-            Map(m => m.FirstName).Name("förnamn");
-            Map(m => m.LastName).Name("efternamn");
-            Map(m => m.PersonNumber).Name("personnummer");
-            Map(m => m.Address).Name("adress");
-            Map(m => m.ApartmentNumber).Name("lägenhetsnummer");
-            Map(m => m.PostalCode).Name("postnummer");
-            Map(m => m.City).Name("stad");
-
-        }
-       
     }
 
     public class AddressCsv
